@@ -4,7 +4,8 @@
 # ------------------------------------------------------------------------------
 import time
 import sys
-import logging
+# doesn't work?
+# import logging
 
 import pynvim
 
