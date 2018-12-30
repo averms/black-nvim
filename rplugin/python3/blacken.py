@@ -4,6 +4,7 @@
 # ------------------------------------------------------------------------------
 import time
 import sys
+
 # doesn't work?
 # import logging
 
@@ -47,11 +48,15 @@ class Main:
             new_buffer_str = black.format_file_contents(to_format, **opts)
         except black.NothingChanged:
             self.vi.out_write(
-                f"Already well formatted, good job. (took {time.time() - start:.4f}s)\n"
+                f"Already well formatted, good job (took {time.time() - start:.4f}s).\n"
+            )
+        except black.InvalidInput:
+            self.vi.err_write(
+                "Black could not parse the input. "
+                "Make sure your code is syntactically correct before running.\n"
             )
         else:
             cursor = self.vi.current.window.cursor
             self.vi.current.buffer[:] = new_buffer_str.split("\n")[:-1]
             self.vi.current.window.cursor = cursor
             self.vi.out_write(f"Reformatted in {time.time() - start:.4f}s.\n")
-
