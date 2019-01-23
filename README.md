@@ -3,16 +3,23 @@ black-nvim
 A port of the [official black plugin][1] to use neovim's remote provider interface.
 
 Differences:
-- It runs asynchronously, so it won't block neovim while formatting the buffer.
+- It runs asynchronously, so it won't block scrolling while formatting the buffer.
 - Checks if filetype is "python" before formatting.
-- More robust error handling.
-- This doesn't have all the features of the official one yet
-  (you can't upgrade black from within neovim).
+- More robust error handling and better error messages.
+- Only vital features (Upgrading the black package is left to the user).
 - Choose your own commands, only a function is exported.
 
 `mistune.py` is used as a test file.
 
 [1]: https://github.com/ambv/black/tree/master/plugin/black.vim
+
+Installation
+------------
+| Plugin manager | How to install                                             |
+|----------------|------------------------------------------------------------|
+| minpac         | `call minpac#add('a-vrma/black-nvim')`                     |
+| dein.vim       | `call dein#add('a-vrma/black-nvim')`                       |
+| vim-plug       | `Plug 'a-vrma/black-nvim', {'do': ':UpdateRemotePlugins'}` |
 
 Options
 -------
@@ -36,3 +43,8 @@ elseif has('unix')
     nnoremap <buffer> <m-F> :call Black()<cr>
 endif
 ```
+
+License
+-------
+black-nvim is distributed under the MIT/Expat license.
+See LICENSE file for details.
