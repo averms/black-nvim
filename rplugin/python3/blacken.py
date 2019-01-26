@@ -32,7 +32,7 @@ class Main:
             self.vi.err_write("Not in a python file.\n")
             return
 
-        start = time.time()
+        start = time.perf_counter()
         options = self._get_opts()
         buf_str = "\n".join(self.vi.current.buffer) + "\n"
         self._format_buff(buf_str, options, start)
@@ -54,7 +54,7 @@ class Main:
             new_buffer_str = black.format_file_contents(to_format, **opts)
         except black.NothingChanged:
             self.vi.out_write(
-                f"Already well formatted, good job (took {time.time() - start:.4f}s).\n"
+                f"Already well formatted, good job (took {time.perf_counter() - start:.4f}s).\n"
             )
         except black.InvalidInput:
             self.vi.err_write(
@@ -65,4 +65,4 @@ class Main:
             cursor = self.vi.current.window.cursor
             self.vi.current.buffer[:] = new_buffer_str.split("\n")[:-1]
             self.vi.current.window.cursor = cursor
-            self.vi.out_write(f"Reformatted in {time.time() - start:.4f}s.\n")
+            self.vi.out_write(f"Reformatted in {time.perf_counter() - start:.4f}s.\n")
