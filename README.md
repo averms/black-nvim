@@ -9,8 +9,6 @@ Differences:
 - Only vital features (Upgrading the black package is left to the user).
 - Choose your own commands, only a function is exported.
 
-`mistune.py` is used as a test file.
-
 [1]: https://github.com/ambv/black/tree/master/plugin/black.vim
 
 Installation
@@ -21,14 +19,39 @@ Installation
 | dein.vim       | `call dein#add('a-vrma/black-nvim')`                       |
 | vim-plug       | `Plug 'a-vrma/black-nvim', {'do': ':UpdateRemotePlugins'}` |
 
+If you don't already have a system for managing python environments on your computer
+I would recommend the following:
+
+- Make sure you have at least version 3.6.
+- Set up a virtual environment for use with neovim.
+  ```sh
+  mkdir -p ~/.local/venv
+  python3 -m venv ~/.local/venv/nvim
+  cd ~/.local/venv/nvim
+  . ./bin/activate  # for most people (https://docs.python.org/3/library/venv.html)
+  pip install pynvim black
+  ```
+- Tell neovim about that environment like so:
+  ```vim
+  let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+  ```
+- Run `:checkhealth`. The python3 provider section should be not-red.
+
 Options
 -------
-- `g:black_fast`
-  Set to `1` to skip the AST check.
-- `g:black_skip_string_normalization`
-  Set to `1` to skip normalizing all strings to double quotes.
-- `g:black_linelength`
-  Set to an integer to tell black where to wrap around.
+Use `black#settings`. For example:
+
+```
+let g:black#settings = {
+            \ 'fast': 1,
+            \ 'line_length': 100,
+            \}
+```
+
+- `fast` (default: 0)
+  Set to a non-zero number to skip the AST check.
+- `line_length` (default: 88)
+  Set to an integer to tell black where to wrap lines.
 
 Setup
 -----
@@ -48,3 +71,5 @@ License
 -------
 black-nvim is distributed under the MIT/Expat license.
 See LICENSE file for details.
+
+Mistune.py (BSD 3-clause) is used as a test file. It is not part of the plugin.

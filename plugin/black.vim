@@ -1,4 +1,3 @@
 if !has('nvim')
-    echom 'This plugin requires neovim'
-    finish
+    echomsg 'Black-nvim uses features available only in neovim.'
 endif

@@ -14,7 +14,7 @@ try:
     import black
 except ImportError:
     print(
-        "[**] Black is not installed in your g:python3_host_prog, "
+        "[*] Black is not installed in your g:python3_host_prog, "
         "please install it with pip and try again",
         file=sys.stderr,
     )
@@ -24,45 +24,42 @@ except ImportError:
 @pynvim.plugin
 class Main:
     def __init__(self, nvim: pynvim.api.Nvim):
-        self.vi = nvim
+        self.n = nvim
 
     @pynvim.function("Black")
     def black(self, args: List[str]) -> None:
-        if self.vi.current.buffer.options.get("filetype") != "python":
-            self.vi.err_write("Not in a python file.\n")
+        if self.n.current.buffer.options.get("filetype") != "python":
+            self.n.err_write("Not in a python file.\n")
             return
 
         start = time.perf_counter()
         options = self._get_opts()
-        buf_str = "\n".join(self.vi.current.buffer) + "\n"
+        buf_str = "\n".join(self.n.current.buffer) + "\n"
         self._format_buff(buf_str, options, start)
 
-    def _get_opts(self) -> Dict[str, Union[int, bool]]:
-        options = {
-            "fast": bool(self.vi.vars.get("black_fast", False)),
-            "line_length": self.vi.vars.get("black_linelength", 88),
-            "mode": black.FileMode.AUTO_DETECT,
-        }
-        if self.vi.vars.get("black_skip_string_normalization"):
-            options["mode"] |= black.FileMode.NO_STRING_NORMALIZATION
+    def _get_opts(self) -> Dict[str, int]:
+        options = {"fast": 0, "line_length": 88}
+        user_options = self.n.vars.get("black#settings")
+        if user_options:
+            options.update(user_options)
         return options
 
-    def _format_buff(
-        self, to_format: str, opts: Dict[str, Union[int, bool]], start: float
-    ) -> None:
+    def _format_buff(self, to_format: str, opts: Dict[str, int], start: float) -> None:
         try:
             new_buffer_str = black.format_file_contents(to_format, **opts)
         except black.NothingChanged:
-            self.vi.out_write(
-                f"Already well formatted, good job (took {time.perf_counter() - start:.4f}s).\n"
+            self.n.out_write(
+                "Already well formatted, good job "
+                f"(took {time.perf_counter() - start:.4f}s).\n"
             )
         except black.InvalidInput:
-            self.vi.err_write(
+            self.n.err_write(
                 "Black could not parse the input. "
                 "Make sure your code is syntactically correct before running.\n"
             )
         else:
-            cursor = self.vi.current.window.cursor
-            self.vi.current.buffer[:] = new_buffer_str.split("\n")[:-1]
-            self.vi.current.window.cursor = cursor
-            self.vi.out_write(f"Reformatted in {time.perf_counter() - start:.4f}s.\n")
+            # update buffer, remembering the location of the cursor
+            cursor = self.n.current.window.cursor
+            self.n.current.buffer[:] = new_buffer_str.split("\n")[:-1]
+            self.n.current.window.cursor = cursor
+            self.n.out_write(f"Reformatted in {time.perf_counter() - start:.4f}s.\n")
