@@ -48,10 +48,7 @@ class Main:
         try:
             new_buffer_str = black.format_file_contents(to_format, **opts)
         except black.NothingChanged:
-            self.n.out_write(
-                "Already well formatted, good job "
-                f"(took {time.perf_counter() - start:.4f}s).\n"
-            )
+            self.n.out_write("Already well formatted, good job.\n")
         except black.InvalidInput:
             self.n.err_write(
                 "Black could not parse the input. "
