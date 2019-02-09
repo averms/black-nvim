@@ -25,10 +25,10 @@ I would recommend the following:
 - Make sure you have at least version 3.6.
 - Set up a virtual environment for use with neovim.
   ```sh
-  mkdir -p ~/.local/venv
-  python3 -m venv ~/.local/venv/nvim
-  cd ~/.local/venv/nvim
-  . ./bin/activate  # for most people (https://docs.python.org/3/library/venv.html)
+  mkdir -p ~/.local/venv && cd ~/.local/venv
+  python3 -m venv nvim
+  cd nvim
+  . ./bin/activate
   pip install pynvim black
   ```
 - Tell neovim about that environment like so:
@@ -43,9 +43,9 @@ Use `black#settings`. For example:
 
 ```vim
 let g:black#settings = {
-            \ 'fast': 1,
-            \ 'line_length': 100,
-            \}
+  \ 'fast': 1,
+  \ 'line_length': 100,
+\}
 ```
 
 - `fast` (default: 0)
