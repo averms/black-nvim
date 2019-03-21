@@ -6,8 +6,7 @@ import time
 import sys
 from typing import List, Dict, Union
 
-# doesn't work?
-# import logging
+# import logging (doesn't work?)
 import pynvim
 
 try:
@@ -28,6 +27,7 @@ class Main:
 
     @pynvim.function("Black")
     def black(self, args: List[str]) -> None:
+        # args is not used but needs to be their to avoid an error.
         if self.n.current.buffer.options.get("filetype") != "python":
             self.n.err_write("Not in a python file.\n")
             return
@@ -37,16 +37,25 @@ class Main:
         buf_str = "\n".join(self.n.current.buffer) + "\n"
         self._format_buff(buf_str, options, start)
 
-    def _get_opts(self) -> Dict[str, int]:
-        options = {"fast": 0, "line_length": 88}
+    def _get_opts(self) -> Dict[str, Union[int, bool]]:
+        options = {
+            "fast": False,
+            "line_length": 88,
+            "is_pyi": self.n.current.buffer.name.endswith(".pyi"),
+        }
         user_options = self.n.vars.get("black#settings")
-        if user_options:
+        if user_options is not None:
             options.update(user_options)
         return options
 
-    def _format_buff(self, to_format: str, opts: Dict[str, int], start: float) -> None:
+    def _format_buff(
+        self, to_format: str, opts: Dict[str, Union[int, bool]], start: float
+    ) -> None:
+        mode = black.FileMode(line_length=opts["line_length"], is_pyi=opts["is_pyi"])
         try:
-            new_buffer_str = black.format_file_contents(to_format, **opts)
+            new_buffer = black.format_file_contents(
+                to_format, fast=opts["fast"], mode=mode
+            )
         except black.NothingChanged:
             self.n.out_write("Already well formatted, good job.\n")
         except black.InvalidInput:
@@ -57,6 +66,12 @@ class Main:
         else:
             # update buffer, remembering the location of the cursor
             cursor = self.n.current.window.cursor
-            self.n.current.buffer[:] = new_buffer_str.split("\n")[:-1]
-            self.n.current.window.cursor = cursor
+
+            self.n.current.buffer[:] = new_buffer.split("\n")[:-1]
+            try:
+                self.n.current.window.cursor = cursor
+            except pynvim.api.NvimError:
+                # if cursor is outside buffer, set it to last line.
+                self.n.current.window.cursor = (len(self.n.current.buffer), 0)
+
             self.n.out_write(f"Reformatted in {time.perf_counter() - start:.4f}s.\n")
