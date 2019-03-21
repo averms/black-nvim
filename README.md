@@ -60,10 +60,12 @@ I set it like this so that alt-shift-f formats the buffer
 (in after/ftplugin/python.vim):
 
 ```vim
-if has('mac')
-    nnoremap <buffer> Ï :call Black()<cr>
-elseif has('unix')
-    nnoremap <buffer> <m-F> :call Black()<cr>
+if has("mac")
+    nnoremap <buffer> <silent> Ï :Clangformat<cr>
+    inoremap <buffer> <silent> Ï <c-o>:Clangformat<cr>
+elseif has("unix")
+    nnoremap <buffer> <silent> <m-F> :Clangformat<cr>
+    inoremap <buffer> <silent> <m-F> <c-o>:Clangformat<cr>
 endif
 ```
 
