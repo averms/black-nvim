@@ -1,6 +1,8 @@
 black-nvim
 ==========
 A port of the [official black plugin][1] to use neovim's remote provider interface.
+**If you are having problems, make sure that you are on the latest version of
+black (19.3b0). There was a change in the API.**
 
 Differences:
 - It runs asynchronously, so it won't block scrolling while formatting the buffer.
