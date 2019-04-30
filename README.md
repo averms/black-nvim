@@ -45,9 +45,9 @@ Use `black#settings`. For example:
 
 ```vim
 let g:black#settings = {
-  \ 'fast': 1,
-  \ 'line_length': 100,
-\}
+    \ 'fast': 1,
+    \ 'line_length': 100,
+    \}
 ```
 
 - `fast` (default: 0)
