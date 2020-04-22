@@ -1,20 +1,20 @@
-black-nvim
-==========
+# black-nvim
+
 A port of the [official black plugin][1] to use neovim's remote provider interface.
 **If you are having problems, make sure that you are on the latest version of
-black (19.3b0). There was a change in the API.**
+black (19.3b0+). There was a change in the API.**
 
 Differences:
 - It runs asynchronously, so it won't block scrolling while formatting the buffer.
 - Checks if filetype is "python" before formatting.
 - More robust error handling and better error messages.
 - Only vital features (Upgrading the black package is left to the user).
-- Choose your own commands, only a function is exported.
+- Choose your own commands/keybinds, only a function is exported.
 
 [1]: https://github.com/ambv/black/tree/master/plugin/black.vim
 
-Installation
-------------
+## Installation
+
 | Plugin manager | How to install                                             |
 |----------------|------------------------------------------------------------|
 | minpac         | `call minpac#add('a-vrma/black-nvim')`                     |
@@ -39,8 +39,8 @@ I would recommend the following:
   ```
 - Run `:checkhealth`. The python3 provider section should be not-red.
 
-Options
--------
+## Options
+
 Use `black#settings`. For example:
 
 ```vim
@@ -51,12 +51,12 @@ let g:black#settings = {
 ```
 
 - `fast` (default: 0)
-  Set to a non-zero number to skip the AST check.
+  Set to a non-zero number to skip the AST check. This makes formatting a lot faster.
 - `line_length` (default: 88)
   Set to an integer to tell black where to wrap lines.
 
-Setup
------
+## Setup
+
 You can set `Black()` to a command, keymapping, or just call it directly.
 I set it like this so that alt-shift-f formats the buffer
 (in after/ftplugin/python.vim):
@@ -71,9 +71,10 @@ elseif has("unix")
 endif
 ```
 
-License
--------
+## License
+
 black-nvim is distributed under the MIT/Expat license.
 See LICENSE file for details.
 
-Mistune.py (BSD 3-clause) is used as a test file. It is not part of the plugin.
+mistune.py (distributed under the BSD 3-clause license) is used as a test file. It is
+not part of the plugin.
