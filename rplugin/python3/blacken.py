@@ -26,8 +26,8 @@ class Main:
         self.n = nvim
 
     @pynvim.function("Black")
+    # args is not used but needs to be there to avoid an error.
     def black(self, args: List[str]) -> None:
-        # args is not used but needs to be their to avoid an error.
         if self.n.current.buffer.options.get("filetype") != "python":
             self.n.err_write("Not in a python file.\n")
             return
