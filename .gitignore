@@ -2,6 +2,9 @@
 dev.vim
 md2vim
 
+# vim stuff
+tags
+
 # python stuff
 .mypy_cache/
 __pycache__/

@@ -1,4 +1,4 @@
-black.txt                                           Format your code using Black
+*black.txt*                                           Format your code using Black
 
 --------------------------------------------------------------------------------
 INTRODUCTION                                                  *black-introduction*
