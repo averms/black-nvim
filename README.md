@@ -3,6 +3,7 @@
 A port of the [official black plugin] to Neovim's remote Python plugin interface.
 
 Differences:
+
 - It runs asynchronously, so it won't block scrolling while formatting the buffer.
 - Checks if filetype is "python" before formatting.
 - More robust error handling and better error messages.
@@ -37,37 +38,9 @@ I would recommend the following:
   ```
 - Run `:checkhealth`. The python3 provider section should be not-red.
 
-## Options
+## Documentation
 
-Use `black#settings`. For example:
-
-```vim
-let g:black#settings = {
-    \ 'fast': 1,
-    \ 'line_length': 100
-\}
-```
-
-- `fast` (default: 0)
-  Set to a non-zero number to skip the AST check. This makes formatting a lot faster.
-- `line_length` (default: 88)
-  Set to an integer to tell black where to wrap lines.
-
-## Setup
-
-You can set `Black()` to a command, keymapping, or just call it directly.
-I set it like this so that alt-shift-f formats the buffer
-(in after/ftplugin/python.vim):
-
-```vim
-if has("mac")
-    nnoremap <buffer> <silent> Ï :Black<cr>
-    inoremap <buffer> <silent> Ï <c-o>:Black<cr>
-elseif has("unix")
-    nnoremap <buffer> <silent> <m-F> :Black<cr>
-    inoremap <buffer> <silent> <m-F> <c-o>:Black<cr>
-endif
-```
+See <doc/black.md>.
 
 ## License
 
