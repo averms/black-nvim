@@ -1,12 +1,8 @@
-# ------------------------------------------------------------------------------
-# A port of the black.vim plugin to the remote python provider
-# By Aman Verma
-# ------------------------------------------------------------------------------
+# See LICENSE file for copyright and license details.
 import time
 import sys
 from typing import List, Dict, Union
 
-# import logging (doesn't work?)
 import pynvim
 
 try:

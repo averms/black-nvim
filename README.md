@@ -1,8 +1,6 @@
 # black-nvim
 
-A port of the [official black plugin][1] to use neovim's remote provider interface.
-**If you are having problems, make sure that you are on the latest version of
-black (19.3b0+). There was a change in the API.**
+A port of the [official black plugin] to Neovim's remote Python plugin interface.
 
 Differences:
 - It runs asynchronously, so it won't block scrolling while formatting the buffer.
@@ -11,7 +9,7 @@ Differences:
 - Only vital features (Upgrading the black package is left to the user).
 - Choose your own commands/keybinds, only a function is exported.
 
-[1]: https://github.com/ambv/black/tree/master/plugin/black.vim
+[official black plugin]: https://github.com/ambv/black/tree/master/plugin/black.vim
 
 ## Installation
 
@@ -46,8 +44,8 @@ Use `black#settings`. For example:
 ```vim
 let g:black#settings = {
     \ 'fast': 1,
-    \ 'line_length': 100,
-    \}
+    \ 'line_length': 100
+\}
 ```
 
 - `fast` (default: 0)
@@ -63,11 +61,11 @@ I set it like this so that alt-shift-f formats the buffer
 
 ```vim
 if has("mac")
-    nnoremap <buffer> <silent> Ï :Clangformat<cr>
-    inoremap <buffer> <silent> Ï <c-o>:Clangformat<cr>
+    nnoremap <buffer> <silent> Ï :Black<cr>
+    inoremap <buffer> <silent> Ï <c-o>:Black<cr>
 elseif has("unix")
-    nnoremap <buffer> <silent> <m-F> :Clangformat<cr>
-    inoremap <buffer> <silent> <m-F> <c-o>:Clangformat<cr>
+    nnoremap <buffer> <silent> <m-F> :Black<cr>
+    inoremap <buffer> <silent> <m-F> <c-o>:Black<cr>
 endif
 ```
 
