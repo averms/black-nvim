@@ -1,13 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-test_() {
+check() {
     nvim -u dev.vim
 }
 
-build_doc() {
+build-doc() {
     ./md2vim -notoc -desc 'Format your code using Black' doc/black.md doc/black.txt
-    printf 'vim:ft=help:tw=80:ts=4:et:' >> doc/black.txt
+    printf 'vim:ft=help:tw=79:ts=4:et:\n' >> doc/black.txt
     nvim doc/black.txt
 }
 
@@ -19,7 +19,7 @@ h() {
 }
 
 default() {
-    test_ "$@"
+    check "$@"
 }
 
 TIMEFORMAT="Task completed in %3lR"

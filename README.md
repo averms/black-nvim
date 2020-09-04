@@ -43,7 +43,7 @@ I would recommend the following:
 
 ## Documentation
 
-See <doc/black.md>.
+See [black.md](doc/black.md) or type `:h black.txt`.
 
 ## License
 
