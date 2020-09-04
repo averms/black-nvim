@@ -8,7 +8,6 @@ Differences:
 - Checks if filetype is "python" before formatting.
 - More robust error handling and better error messages.
 - Only vital features (Upgrading the black package is left to the user).
-- Choose your own commands/keybinds, only a function is exported.
 - Don't have to clone the entire source repo just to get the plugin.
 
 [official black plugin]: https://github.com/ambv/black/tree/master/plugin/black.vim
