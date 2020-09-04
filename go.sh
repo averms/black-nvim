@@ -2,7 +2,7 @@
 set -euo pipefail
 
 check() {
-    nvim -u dev.vim
+    nvim -u dev.vim +'cd test/'
 }
 
 build-doc() {
