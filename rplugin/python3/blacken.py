@@ -29,11 +29,11 @@ class Main:
             return
 
         start = time.perf_counter()
-        options = self._get_opts()
+        options = self.get_opts()
         buf_str = "\n".join(self.n.current.buffer) + "\n"
-        self._format_buff(buf_str, options, start)
+        self.format_buff(buf_str, options, start)
 
-    def _get_opts(self) -> Dict[str, Union[int, bool]]:
+    def get_opts(self) -> Dict[str, Union[int, bool]]:
         options = {
             "fast": False,
             "line_length": 88,
@@ -44,7 +44,7 @@ class Main:
             options.update(user_options)
         return options
 
-    def _format_buff(
+    def format_buff(
         self, to_format: str, opts: Dict[str, Union[int, bool]], start: float
     ) -> None:
         mode = black.FileMode(line_length=opts["line_length"], is_pyi=opts["is_pyi"])
@@ -70,4 +70,4 @@ class Main:
                 # if cursor is outside buffer, set it to last line.
                 self.n.current.window.cursor = (len(self.n.current.buffer), 0)
 
-            self.n.out_write(f"Reformatted in {time.perf_counter() - start:.4f}s.\n")
+            self.n.out_write(f"Reformatted in {time.perf_counter() - start:.2f}s.\n")
