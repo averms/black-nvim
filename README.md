@@ -49,6 +49,3 @@ See [black.md](doc/black.md) or type `:h black.txt`.
 
 black-nvim is distributed under the MIT/Expat license.
 See LICENSE file for details.
-
-mistune.py (distributed under the BSD 3-clause license) is used as a test file. It is
-not part of the plugin.
