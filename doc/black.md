@@ -36,9 +36,3 @@ let g:black#settings = {
   Set to a non-zero number to skip the AST check. This makes formatting a lot faster.
 - `line_length` (default: 88)
   Set to an integer to tell black where to wrap lines.
-
-
-## License
-
-black-nvim was written by Aman Verma and is distributed under the MIT/Expat license.
-See LICENSE file for details.
