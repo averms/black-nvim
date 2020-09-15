@@ -9,6 +9,7 @@ Differences:
 - More robust error handling and better error messages.
 - Only vital features (Upgrading the black package is left to the user).
 - Don't have to clone the entire source repo just to get the plugin.
+- Zero lines of Vimscript.
 
 [official black plugin]: https://github.com/ambv/black/tree/master/plugin/black.vim
 

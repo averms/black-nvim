@@ -7,7 +7,7 @@ check() {
 
 build-doc() {
     ./md2vim -notoc -desc 'Format your code using Black' doc/black.md doc/black.txt
-    printf 'vim:ft=help:tw=79:ts=4:et:\n' >> doc/black.txt
+    printf 'vim:ft=help:tw=80:ts=4:et:\n' >> doc/black.txt
     nvim doc/black.txt
 }
 
