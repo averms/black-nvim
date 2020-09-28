@@ -3,22 +3,17 @@
 black-nvim formats your Python buffer asynchronously using [Black]. Its interface is
 simple: it defines a function, `Black()`, that formats the entire buffer.
 
-[black]: https://github.com/psf/black
+[Black]: https://github.com/psf/black
 
 ## Usage
 
 You can set `Black()` to a command, key mapping, or just call it directly.
-I set it like this so that alt-shift-f formats the buffer
-(in after/ftplugin/python.vim):
+For example, you can put the following commands in after/ftplugin/python.vim so
+that ctrl-q formats the buffer:
 
 ```vim
-if has("mac")
-    nnoremap <buffer> <silent> Ï :Black<cr>
-    inoremap <buffer> <silent> Ï <c-o>:Black<cr>
-elseif has("unix")
-    nnoremap <buffer> <silent> <m-F> :Black<cr>
-    inoremap <buffer> <silent> <m-F> <c-o>:Black<cr>
-endif
+nnoremap <buffer><silent> <c-q> <cmd>Black<cr>
+inoremap <buffer><silent> <c-q> <cmd>Black<cr>
 ```
 
 ## Configuration
