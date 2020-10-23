@@ -28,7 +28,6 @@ For example:
         \ 'line_length': 100
     \}
 <
-
 * `fast` (default: 0)
   Set to a non-zero number to skip the AST check. This makes formatting a lot
   faster.
