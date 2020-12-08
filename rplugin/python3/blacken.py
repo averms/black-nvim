@@ -1,4 +1,6 @@
-# See LICENSE file for copyright and license details.
+# © 2019-2020 Aman Verma <https://aman.raoverma.com/contact.html>
+# Distributed under the MIT license, see LICENSE.md file for details.
+
 import time
 import sys
 from typing import List, Dict, Union
