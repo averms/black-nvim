@@ -15,7 +15,7 @@ Differences:
 
 ## Installation
 
-The 'master' branch is stable. You can see what is coming up by looking at 'develop' but
+The 'master' branch is stable. You can see what is coming up by looking at 'devel' but
 I wouldn't recommend using it.
 
 | Plugin manager | How to install                                             |
