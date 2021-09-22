@@ -20,9 +20,9 @@ I wouldn't recommend using it.
 
 | Plugin manager | How to install                                             |
 |----------------|------------------------------------------------------------|
-| minpac         | `call minpac#add('a-vrma/black-nvim')`                     |
-| dein.vim       | `call dein#add('a-vrma/black-nvim')`                       |
-| vim-plug       | `Plug 'a-vrma/black-nvim', {'do': ':UpdateRemotePlugins'}` |
+| minpac         | `call minpac#add('averms/black-nvim')`                     |
+| dein.vim       | `call dein#add('averms/black-nvim')`                       |
+| vim-plug       | `Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}` |
 
 If you don't already have a system for managing python environments on your computer
 I would recommend the following:
