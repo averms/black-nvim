@@ -16,6 +16,9 @@ nnoremap <buffer><silent> <c-q> <cmd>call Black()<cr>
 inoremap <buffer><silent> <c-q> <cmd>call Black()<cr>
 ```
 
+You can also use \*BlackSync()\* to format your buffer synchronously. This can
+be used in the |BufWritePre| autocmd to format your buffer on save.
+
 ## Configuration
 
 Use \*g:black#settings\*

@@ -35,6 +35,10 @@ class Blacken:
         buf_str = "\n".join(self.n.current.buffer) + "\n"
         self.format_buff(buf_str, options, start)
 
+    @pynvim.function("BlackSync", sync=True)
+    def blacksync(self, args: List[str]) -> None:
+        return self.black(args)
+
     def get_opts(self) -> Dict[str, Union[int, bool]]:
         options = {
             "fast": False,
