@@ -19,7 +19,7 @@ except ImportError:
 
 
 @pynvim.plugin
-class Main:
+class Blacken:
     def __init__(self, nvim: pynvim.api.Nvim):
         self.n = nvim
 
