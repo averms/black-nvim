@@ -40,6 +40,7 @@ I would recommend the following:
   ```vim
   let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
   ```
+  If you're using vim-plug, this line needs to be before your `Plug` statement.
 - Run `:checkhealth`. The python3 provider section should be not-red.
 
 ## Documentation
