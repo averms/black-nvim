@@ -2,7 +2,7 @@
 set -euo pipefail
 
 check() {
-    nvim -u dev.vim +'cd test/'
+    nvim -u dev.vim mistune.py
 }
 
 build-doc() {

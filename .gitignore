@@ -1,12 +1,11 @@
 # personal / testing stuff
 dev.vim
 md2vim
+mistune.py
 
 # vim stuff
-tags
+/doc/tags
 
 # python stuff
 .mypy_cache/
 __pycache__/
-*.py[cod]
-*$py.class
