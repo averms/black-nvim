@@ -7,7 +7,8 @@ Differences:
 - It runs asynchronously, so it won't block scrolling while formatting the buffer.
 - Checks if filetype is "python" before formatting.
 - More robust error handling and better error messages.
-- Only vital features (Upgrading the black package is left to the user).
+- Missing some features (Upgrading the black package automatically, respecting
+  pyproject.toml).
 - Don't have to clone the entire source repo just to get the plugin.
 - Zero lines of Vimscript.
 
