@@ -29,7 +29,8 @@ For example:
 >
     let g:black#settings = {
         \ 'fast': 1,
-        \ 'line_length': 100
+        \ 'line_length': 100,
+        \ 'target_version': 'py310'
     \}
 <
 * `fast` (default: 0)
@@ -37,5 +38,8 @@ For example:
   faster.
 * `line_length` (default: 88)
   Set to an integer to tell Black where to wrap lines.
+* `target_version` (default: '')
+  Sets the `--target-version` flag in the commandline. Useful if you use the new match
+  syntax, as Black can only handle it when you set the version to 3.10 or above.
 
 vim:ft=help:tw=80:ts=4:et:
