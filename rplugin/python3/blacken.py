@@ -56,7 +56,7 @@ class Blacken:
         mode = black.FileMode(line_length=opts["line_length"], is_pyi=opts["is_pyi"])
         try:
             new_buffer = black.format_file_contents(
-                to_format, fast=opts["fast"], mode=mode
+                to_format, fast=bool(opts["fast"]), mode=mode
             )
         except black.NothingChanged:
             self.n.out_write("Already well formatted, good job.\n")
