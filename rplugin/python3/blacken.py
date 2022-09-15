@@ -3,12 +3,13 @@
 
 import time
 import sys
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Set
 
 import pynvim
 
 try:
     import black
+    from black import TargetVersion
 except ImportError:
     print(
         "[*] Black is not installed in your g:python3_host_prog, "
@@ -25,7 +26,7 @@ class Blacken:
 
     @pynvim.function("Black")
     # args is not used but needs to be there to avoid an error.
-    def black(self, args: List[str]) -> None:
+    def black_(self, args: List[str]) -> None:
         if self.n.current.buffer.options.get("filetype") != "python":
             self.n.err_write("Not in a python file.\n")
             return
@@ -37,23 +38,60 @@ class Blacken:
 
     @pynvim.function("BlackSync", sync=True)
     def blacksync(self, args: List[str]) -> None:
-        return self.black(args)
+        return self.black_(args)
 
-    def get_opts(self) -> Dict[str, Union[int, bool]]:
+    def get_opts(self) -> Dict[str, Union[int, bool, str]]:
         options = {
             "fast": False,
             "line_length": 88,
             "is_pyi": self.n.current.buffer.name.endswith(".pyi"),
+            "target_version": "",
         }
         user_options = self.n.vars.get("black#settings")
         if user_options is not None:
             options.update(user_options)
         return options
 
+    def parse_target_version(self, target_version: str) -> Set[black.TargetVersion]:
+        self.n.err_write(repr(black))
+        if target_version.lower() == "":
+            return set()
+        elif target_version.lower() == "py33":
+            return {black.TargetVersion.PY33}
+        elif target_version.lower() == "py34":
+            return {black.TargetVersion.PY34}
+        elif target_version.lower() == "py35":
+            return {black.TargetVersion.PY35}
+        elif target_version.lower() == "py36":
+            return {black.TargetVersion.PY36}
+        elif target_version.lower() == "py37":
+            return {black.TargetVersion.PY37}
+        elif target_version.lower() == "py38":
+            return {black.TargetVersion.PY38}
+        elif target_version.lower() == "py39":
+            return {black.TargetVersion.PY39}
+        elif target_version.lower() == "py310":
+            return {black.TargetVersion.PY310}
+        elif target_version.lower() == "py311":
+            return {black.TargetVersion.PY311}
+        else:
+            self.n.err_write(
+                f"{target_version!r} is an invalid target_version. "
+                "Use 'py38' for python 3.8 for example.\n"
+            )
+            return set()
+
     def format_buff(
-        self, to_format: str, opts: Dict[str, Union[int, bool]], start: float
+        self,
+        to_format: str,
+        opts: Dict[str, Union[int, bool, str]],
+        start: float,
     ) -> None:
-        mode = black.FileMode(line_length=opts["line_length"], is_pyi=opts["is_pyi"])
+        mode = black.FileMode(
+            line_length=opts["line_length"],
+            is_pyi=opts["is_pyi"],
+            target_versions=self.parse_target_version(opts["target_version"]),
+        )
         try:
             new_buffer = black.format_file_contents(
                 to_format, fast=bool(opts["fast"]), mode=mode

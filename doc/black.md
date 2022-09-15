@@ -27,7 +27,8 @@ For example:
 ```vim
 let g:black#settings = {
     \ 'fast': 1,
-    \ 'line_length': 100
+    \ 'line_length': 100,
+    \ 'target_version': 'py310'
 \}
 ```
 
@@ -35,3 +36,6 @@ let g:black#settings = {
   Set to a non-zero number to skip the AST check. This makes formatting a lot faster.
 - `line_length` (default: 88)
   Set to an integer to tell Black where to wrap lines.
+- `target_version` (default: '')
+  Sets the `--target-version` flag in the commandline. Useful if you use the new match
+  syntax, as Black can only handle it when you set the version to 3.10 or above.
